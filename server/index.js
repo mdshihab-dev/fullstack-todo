@@ -22,7 +22,7 @@ const limiter = rateLimit({
 
 connectDB()
 app.use(cors({
-    origin: ['http://localhost:5173','https://todo-application-smoky.vercel.app'],
+    origin: 'https://todo-application-smoky.vercel.app',
     credentials: true
 }))
 
