@@ -1,19 +1,7 @@
 const userModel = require("../../model/userModel")
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken') 
-const Queue = require('bull')
-const sendMail = require("../../utils/sendMail")
-
-
-
-let emailQueue = new Queue('email', {
-    redis: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_POR,
-        username: process.env.REDIS_USERNAME,
-        password: process.env.REDIS_PASSWORD
-    }
-})
+const emailQueue = require("../../queues/emailQueue")
 
 const ragistrationController = async (req, res) => {
    let {username,email,password} = req.body
@@ -38,36 +26,21 @@ const ragistrationController = async (req, res) => {
           isVerified: false
       })
 
-  try {
+  try {  
     await user.save()
-
-    let verificationToken = jwt.sign(
-        {id: user._id},
-        process.env.ACCESS_TOKEN_SECRET,
-        {expiresIn: '1d'})
-
-    await emailQueue.add('verifyEmail', {email : user.email, token: verificationToken}, {
-        attempts: 5,
-        backoff: 5000,
-        removeOnComplete: true // Automatically remove ( job success )
-    })
-    res.status(201).send({message : 'Account created successfully'})
+    let verificationToken = jwt.sign({id: user._id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})
+        
+        await emailQueue.add('verifyEmail', {email : user.email, token: verificationToken}, {
+            attempts: 5,
+            backoff: 5000,
+            removeOnComplete: true 
+        })
+        res.status(201).send({message : '📩 Verify your email to get started.'})
     
   } catch (error) {
     console.log('when trying to save data in database' + error);
-    
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  
 }
-
-emailQueue.process('verifyEmail', async (job) => {
-    try {
-        sendMail(job.data.email, job.data.token)
-    } catch (error) {
-        console.log("email not sent" + error)
-    }
-}) 
-  
- 
 
 module.exports = ragistrationController

@@ -27,7 +27,7 @@ const forgotPasswordController = async (req, res) => {
       subject: "Reset Password",
       html: `<h3>Please <a href=${resetLink}> click here </a> to Reset Password</h3>`,
     });
-    res.send({ message: "Please check email for reset password" });
+    res.send({ message: "Please check email for reset password!" });
   } 
   catch (error) {
     console.log(error);

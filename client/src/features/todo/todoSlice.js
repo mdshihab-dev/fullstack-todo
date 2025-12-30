@@ -6,7 +6,7 @@ export const createTodo = createAsyncThunk('todo/createTodo', async (data, thunk
         let res = await todoApi.createTodo(data)
         return res.data
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message)
+        return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
 export const  getTodos = createAsyncThunk('auth/getTodos', async(_, thunkAPI)=>{
@@ -14,7 +14,7 @@ export const  getTodos = createAsyncThunk('auth/getTodos', async(_, thunkAPI)=>{
         let res = await todoApi.getTodos()
         return res.data
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message)
+        return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
 export const  updateTodo = createAsyncThunk('auth/updateTodo', async({id, data}, thunkAPI)=>{
@@ -22,7 +22,7 @@ export const  updateTodo = createAsyncThunk('auth/updateTodo', async({id, data},
         let res = await todoApi.updateTodo(id, data)
         return res.data
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message)
+        return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
 export const  deleteTodo = createAsyncThunk('auth/deleteTodo', async(id, thunkAPI)=>{
@@ -30,7 +30,7 @@ export const  deleteTodo = createAsyncThunk('auth/deleteTodo', async(id, thunkAP
         let res = await todoApi.deleteTodo(id)
         return res.data
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message)
+        return thunkAPI.rejectWithValue(error?.response?.data)
     }
 })
 
