@@ -28,7 +28,7 @@ const loginController = async (req, res) => {
     res.cookie('refreshToken', refreshToken , {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
         maxAge: 365 * 24 * 60 * 60 * 1000
     })
     res.send({
