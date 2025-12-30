@@ -20,7 +20,11 @@ let api = axios.create({
               }
               
           config.headers.Authorization = `Bearer ${accessToken}`
-          config.headers['Content-Type'] = 'multipart/form-data'
+          if (config.data instanceof FormData) {
+              config.headers['Content-Type'] = 'multipart/form-data'
+          } else {
+              config.headers['Content-Type'] = 'application/json'
+          }
        }
        return config
   }) 
