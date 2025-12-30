@@ -55,6 +55,6 @@ app.use('/api/auth', authRoutes)
 app.use('/api/todo', todoRoutes)
 app.use('/api/check/', healthRoute)
 
-app.listen(process.env.PORT, () => {
-    console.log('Server is running')
-})
+// app.listen(process.env.PORT, () => {
+//     console.log('Server is running')
+// })
