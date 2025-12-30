@@ -38,7 +38,7 @@ const Login = () => {
           if (error) {
             toast.error(error, { position: "top-right", autoClose: 3000 });
           }
-        }, [])
+        }, [message, error])
 
   let errors = formik.errors
   let touch = formik.touched
@@ -59,6 +59,7 @@ const Login = () => {
               type="email" 
               name="email"
               placeholder="Email address" 
+              autoComplete="off"
               className={inputStyle}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -76,6 +77,7 @@ const Login = () => {
               type={passwordVisible ? 'text' : "password"} 
               name="password"
               placeholder="Password" 
+              autoComplete="off"
               className={inputStyle}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

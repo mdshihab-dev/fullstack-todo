@@ -61,6 +61,7 @@ const Registration = () => {
               type="text" 
               name='username'
               placeholder="Username" 
+              autoComplete="off"
               className={inputStyle}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -78,6 +79,7 @@ const Registration = () => {
               type="email" 
               name='email'
               placeholder="Email address" 
+              autoComplete="off"
               className={inputStyle}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}  
@@ -95,6 +97,7 @@ const Registration = () => {
               type={passwordVisible ? "text" : "password"} 
               name='password'
               placeholder="Password" 
+              autoComplete="off"
               className={inputStyle}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
