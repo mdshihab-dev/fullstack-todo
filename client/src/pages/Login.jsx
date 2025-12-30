@@ -33,6 +33,7 @@ const Login = () => {
     useEffect(() => {
           if (message) {
             toast.success(message, { position: "top-right", autoClose: 3000 });
+            navigation('/')
           }
           if (error) {
             toast.error(error, { position: "top-right", autoClose: 3000 });
@@ -125,8 +126,6 @@ const Login = () => {
       </div>
     </section>
 
-    {message && navigation('/')}
-    {error && console.log(error)}
     </>
   );
 };

@@ -12,10 +12,8 @@ let api = axios.create({
 
         if (config.url === '/auth/refresh') return config
         if(accessToken){ 
-            console.log('i am from interceptor')
             let decoded = jwtDecode(accessToken)
             if (decoded.exp * 1000 < Date.now()) {
-                console.log('i am from refresh')
                  let res = await api.post('/auth/refresh')
                  accessToken = res.data.accessToken 
                  localStorage.setItem('accessToken', JSON.stringify(accessToken))

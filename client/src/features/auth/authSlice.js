@@ -57,6 +57,7 @@ export const authSlice = createSlice({
     logout: (state, action)=>{
         state.user = null
         state.accessToken = null
+        localStorage.removeItem('accessToken')
     }
   },
   extraReducers: (builder)=>{
