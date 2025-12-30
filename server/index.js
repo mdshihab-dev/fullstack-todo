@@ -22,7 +22,7 @@ const limiter = rateLimit({
 
 connectDB()
 app.use(cors({
-    origin: ['http://localhost:5173','https://todo-application-smoky.vercel.app/'],
+    origin: ['http://localhost:5173','https://todo-application-smoky.vercel.app'],
     credentials: true
 }))
 
@@ -37,7 +37,7 @@ swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:8000/api',
+                url: 'https://todo-application-smoky.vercel.app/api',
             },
         ],
     },
