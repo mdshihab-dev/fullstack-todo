@@ -32,6 +32,7 @@ const Registration = () => {
       }
     })
 
+    useEffect(() => {
       if (message) {
         toast.success(message, { position: "top-right", autoClose: 3000 });
         navigate('/login')
@@ -39,6 +40,7 @@ const Registration = () => {
       if (error) {
         toast.error(error, { position: "top-right", autoClose: 3000 });
       }
+    }, [message, error])
 
   let errors = formik.errors
   let touch = formik.touched
