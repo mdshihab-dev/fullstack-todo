@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useSelector , useDispatch } from "react-redux"
-import {useNavigate, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import { verifyEmail } from "../features/auth/authSlice"
 const VerifyEmail = () => {
 
