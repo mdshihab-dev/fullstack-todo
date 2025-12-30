@@ -31,7 +31,7 @@ const ResetPassword = () => {
             if (error) {
               toast.error(error, { position: "top-right", autoClose: 3000 });
             }
-        }, [message, error])
+        }, [])
     
       let errors = formik.errors
       let touch = formik.touched
