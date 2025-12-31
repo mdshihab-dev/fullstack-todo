@@ -32,24 +32,24 @@ const Registration = () => {
       }
     })
 
-    // useEffect(() => {
-    //   if (message) {
-    //     toast.success(message, { 
-    //       position: "top-right",
-    //       autoClose: 3000 , 
-    //       limit: 1,
-    //      });
-    //     navigate('/login')
-    //     dispatch(clearMessages())
-    //   }
-    //   if (error) {
-    //     toast.error(error, { 
-    //       position: "top-right", 
-    //       autoClose: 3000 ,
-    //       limit: 1});
-    //       dispatch(clearMessages())
-    //   }
-    // },[message, error, navigate, dispatch])
+    useEffect(() => {
+      if (message) {
+        toast.success(message, { 
+          position: "top-right",
+          autoClose: 3000 , 
+          limit: 1,
+         });
+        navigate('/login')
+        dispatch(clearMessages())
+      }
+      if (error) {
+        toast.error(error, { 
+          position: "top-right", 
+          autoClose: 3000 ,
+          limit: 1});
+          dispatch(clearMessages())
+      }
+    },[message, error, navigate, dispatch])
 
   let errors = formik.errors
   let touch = formik.touched
