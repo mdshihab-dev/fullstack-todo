@@ -34,11 +34,19 @@ const Registration = () => {
 
     useEffect(() => {
       if (message) {
-        toast.success(message, { position: "top-right", autoClose: 3000 });
+        toast.success(message, { 
+          position: "top-right",
+          autoClose: 3000 , 
+          limit: 1,
+          // toastId: "unique-id-123"
+         });
         navigate('/login')
       }
       if (error) {
-        toast.error(error, { position: "top-right", autoClose: 3000 });
+        toast.error(error, { 
+          position: "top-right", 
+          autoClose: 3000 ,
+          limit: 1});
       }
     }, [message, error,navigate])
 
