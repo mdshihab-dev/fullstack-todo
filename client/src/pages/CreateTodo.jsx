@@ -20,11 +20,11 @@ const CreateTodo = () => {
         onSubmit: async(values) => {
          try {
           let res = await dispatch(createTodo(values))
-          toast.success(res.message, { position: "top-right", autoClose: 3000 });
+          toast.success(res?.message, { position: "top-right", autoClose: 3000 });
           formik.resetForm();
           setFileKey(prev => prev + 1)
          } catch (err) {
-          toast.error(err.error, { position: "top-right", autoClose: 3000 });
+          toast.error(err?.error, { position: "top-right", autoClose: 3000 });
          }
         }
       })
