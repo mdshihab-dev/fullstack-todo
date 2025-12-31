@@ -1,7 +1,7 @@
-import { login } from "../features/auth/authSlice"
+import { clearMessages, login } from "../features/auth/authSlice"
 import { Link, useNavigate } from "react-router-dom"
 import { MdAlternateEmail, MdOutlineLock} from 'react-icons/md';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LuEyeClosed } from "react-icons/lu";
 import { FaEye} from 'react-icons/fa6';
 import { useFormik } from "formik";
@@ -15,7 +15,7 @@ const Login = () => {
   let [passwordVisible, setPasswordVisible] = useState(false);
   let dispatch = useDispatch()
   let navigation = useNavigate()
-  let {message, error, loading} = useSelector(state => state.auth)
+  let {loading} = useSelector(state => state.auth)
     let initialValues = {
         email: '',
         password: '' 
@@ -24,21 +24,26 @@ const Login = () => {
   let formik = useFormik({
         initialValues: initialValues,
         validationSchema: loginValidation,
-        onSubmit: (values) => {
-          dispatch(login(values))
-          formik.resetForm();
+        onSubmit: async(values) => {
+          try {
+            const res = await dispatch(login(values)).unwrap();
+            toast.success(res?.message, {
+              position: "top-right",
+              autoClose: 3000,
+            });
+            formik.resetForm();
+            navigation('/');
+          } catch (err) {
+            toast.error(err?.error, {
+              position: "top-right",
+              autoClose: 3000,
+            })  
+          }
+          finally {
+              dispatch(clearMessages());
+            }
         }
       })
-
-    useEffect(() => {
-          if (message) {
-            toast.success(message, { position: "top-right", autoClose: 3000 });
-            navigation('/')
-          }
-          if (error) {
-            toast.error(error, { position: "top-right", autoClose: 3000 });
-          }
-        }, [message, error])
 
   let errors = formik.errors
   let touch = formik.touched

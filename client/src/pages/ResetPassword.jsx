@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { resetPass } from "../features/auth/authSlice"
+import { clearMessages, resetPass } from "../features/auth/authSlice"
 import {useNavigate, useParams} from 'react-router-dom'
 import { SyncLoader } from "react-spinners"
 import { resetPasswordValidation } from "../validation/formValidation"
 import { useFormik } from "formik"
 import { toast } from "react-toastify"
 const ResetPassword = () => {
-  let {message, error,loading} = useSelector(state => state.auth)
+  let {loading} = useSelector(state => state.auth)
   let dispatch = useDispatch()
   let navigate = useNavigate()
   let token = useParams()
@@ -15,23 +14,21 @@ const ResetPassword = () => {
      let formik = useFormik({
               initialValues: {resetToken: token , password: ''},
               validationSchema: resetPasswordValidation,
-              onSubmit: (values) => {
-                formik.values.password = values.password
-                console.log(values)
-                dispatch(resetPass(values))
-                formik.resetForm();
+              onSubmit: async(values) => {
+                try {
+                  formik.values.password = values.password
+                  let res =await dispatch(resetPass(values))
+                  toast.success(res.message, { position: "top-right", autoClose: 3000 });
+                  navigate('/login')
+                 formik.resetForm();
+                } catch (error) {
+                  toast.error(error, { position: "top-right", autoClose: 3000 });
+                }
+                finally{
+                  dispatch(clearMessages());
+                }
               }
             })
-      
-       useEffect(() => {
-            if (message) {
-              toast.success(message, { position: "top-right", autoClose: 3000 });
-              navigate('/login')
-            }
-            if (error) {
-              toast.error(error, { position: "top-right", autoClose: 3000 });
-            }
-        }, [message, error])
     
       let errors = formik.errors
       let touch = formik.touched

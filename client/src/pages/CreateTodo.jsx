@@ -10,29 +10,24 @@ import { toast } from 'react-toastify'
 const CreateTodo = () => {
       let inputStyle = 'inputbox-shadow w-full bg-input rounded-lg py-3 px-5 text-sm focus:outline-none focus:border-blue-500 transition-colors placeholder-secondary-text';
       let dispatch = useDispatch()
-      let {message, error, loading} = useSelector(state=> state.todo)
+      let { loading} = useSelector(state=> state.todo)
       const [fileKey, setFileKey] = useState(0);
       
 
    let formik = useFormik({
         initialValues: { text: '', avatar: null},
         validationSchema: todoValidation,
-        onSubmit: (values) => {
-          dispatch(createTodo(values))
+        onSubmit: async(values) => {
+         try {
+          let res = await dispatch(createTodo(values))
+          toast.success(res.message, { position: "top-right", autoClose: 3000 });
+          formik.resetForm();
+          setFileKey(prev => prev + 1)
+         } catch (err) {
+          toast.error(err.error, { position: "top-right", autoClose: 3000 });
+         }
         }
       })
-
-
-      useEffect(() => {
-            if (message) {
-              toast.success(message, { position: "top-right", autoClose: 3000 });
-              formik.resetForm();
-              setFileKey(prev => prev + 1)
-            }
-            if (error) {
-              toast.error(error, { position: "top-right", autoClose: 3000 });
-            }
-    }, [message, error])
 
   let errors = formik.errors
   let touch = formik.touched

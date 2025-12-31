@@ -1,6 +1,5 @@
-import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { forgotPass } from "../features/auth/authSlice"
+import { clearMessages, forgotPass } from "../features/auth/authSlice"
 import { useFormik } from "formik"
 import { forgetPasswordValidation } from "../validation/formValidation"
 import { toast } from "react-toastify"
@@ -9,25 +8,30 @@ import { MdAlternateEmail } from "react-icons/md"
 import { SyncLoader } from "react-spinners"
 const ForgotPassword = () => {
   let dispatch = useDispatch()
-  let {message, error,loading} = useSelector(state => state.auth)
+  let {loading} = useSelector(state => state.auth)
 
   let formik = useFormik({
           initialValues: { email: ''},
           validationSchema: forgetPasswordValidation,
-          onSubmit: (values) => {
-            dispatch(forgotPass(values))
-            formik.resetForm();
+          onSubmit: async (values) => {
+            try {
+              const res = await dispatch(forgotPass(values)).unwrap();
+              toast.success(res?.message, {
+                position: "top-right",
+                autoClose: 3000,
+              });
+              formik.resetForm();
+            } catch (err) {
+              toast.error(err?.error, {
+                position: "top-right",
+                autoClose: 3000,
+              });
+            }
+            finally{
+              dispatch(clearMessages());
+            }
           }
         })
-  
-   useEffect(() => {
-        if (message) {
-          toast.success(message, { position: "top-right", autoClose: 3000 });
-        }
-        if (error) {
-          toast.error(error, { position: "top-right", autoClose: 3000 });
-        }
-    }, [message, error])
 
   let errors = formik.errors
   let touch = formik.touched

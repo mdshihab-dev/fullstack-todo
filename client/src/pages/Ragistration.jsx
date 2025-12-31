@@ -38,7 +38,7 @@ const Registration = () => {
         formik.resetForm();
         navigate('/login');
       } catch (err) {
-        toast.error(err, {
+        toast.error(err?.error, {
           position: "top-right",
           autoClose: 3000,
         });
