@@ -13,7 +13,7 @@ const healthRoute = require('./routes/healthRoute')
 
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, 
-	limit: 5, 
+	limit: process.env.NODE_ENV === 'production' ? 5 : 100, 
 	standardHeaders: true,
 	legacyHeaders: false, 
     message : {error: "Too many requests, please try again later."}
@@ -22,7 +22,7 @@ const limiter = rateLimit({
 
 connectDB()
 app.use(cors({
-    origin: 'https://todo-application-smoky.vercel.app',
+    origin: ['http://localhost:5173','https://todo-application-smoky.vercel.app'],
     credentials: true
 }))
 

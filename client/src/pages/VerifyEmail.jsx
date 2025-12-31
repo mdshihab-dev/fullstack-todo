@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useParams, Link } from 'react-router-dom'
+import { useParams,} from 'react-router-dom'
 import { clearMessages, verifyEmail } from "../features/auth/authSlice"
 
 const VerifyEmail = () => {
@@ -38,12 +38,6 @@ const VerifyEmail = () => {
                 <p className="text-base font-medium opacity-90">
                   Your email has been verified. You can now login.
                 </p>
-                <Link 
-                  to="/login" 
-                  className="mt-6 inline-block w-full py-3 bg-blue-600 hover:bg-blue-700 transition-colors rounded-xl font-bold"
-                >
-                  Go to Login
-                </Link>
               </div>
             )}
 
