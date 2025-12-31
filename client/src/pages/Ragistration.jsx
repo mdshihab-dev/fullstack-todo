@@ -49,7 +49,7 @@ const Registration = () => {
           limit: 1});
           dispatch(clearMessages())
       }
-    }, [message, error,navigate])
+    },[message, error, navigate, dispatch])
 
   let errors = formik.errors
   let touch = formik.touched
