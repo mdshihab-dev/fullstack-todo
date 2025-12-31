@@ -53,7 +53,7 @@ const Registration = () => {
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden text-white">
-      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-[#121212] rounded-2xl shadow-2xl">
+      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-form-bg rounded-2xl shadow-2xl">
         <h2 className="text-2xl font-semibold text-center mb-2">Create Account</h2>
         <p className="text-center text-[15px] text-gray-400 mb-8">
           Already have an account? <Link to="/login" className="text-white ml-0.5 font-medium cursor-pointer hover:underline">Log in</Link>
@@ -129,9 +129,9 @@ const Registration = () => {
         </form>
 
         <div className="flex items-center my-6">
-          <div className="flex-grow border-t border-white/10"></div>
+          <div className="grow border-t border-white/10"></div>
           <span className="mx-4 text-xs text-gray-500 uppercase">OR REGISTER WITH</span>
-          <div className="flex-grow border-t border-white/10"></div>
+          <div className="grow border-t border-white/10"></div>
         </div>
 
         <div className="grid grid-cols-3 gap-3">

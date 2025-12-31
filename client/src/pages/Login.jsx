@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <>
     <section className="relative min-h-screen w-full flex items-center justify-center  overflow-hidden text-white">
-      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-[#121212] rounded-2xl shadow-2xl">
+      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-form-bg rounded-2xl shadow-2xl">
         <h2 className="text-2xl font-semibold text-center mb-2">Welcome Back</h2>
         <p className="text-center text-[15px] text-gray-400 mb-8">
           Don't have an account? <Link to='/register' className="text-white ml-0.5 font-medium cursor-pointer hover:underline">Sign Up</Link>

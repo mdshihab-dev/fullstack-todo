@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { createTodo } from '../features/todo/todoSlice'
 import { SiProtodotio } from "react-icons/si"
 import { useFormik} from 'formik'
@@ -36,7 +36,7 @@ const CreateTodo = () => {
 
     <>
      <section className="relative min-h-screen w-full flex items-center justify-center  overflow-hidden text-white"> 
-      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-[#121212] rounded-2xl shadow-2xl">
+      <div className="shadow-glow relative z-10 w-full max-w-lg p-10 bg-form-bg rounded-2xl shadow-2xl">
         <div className=' flex justify-center'>
           <SiProtodotio className=' text-7xl text-[#0070f3]'/>
         </div>
@@ -89,7 +89,6 @@ const CreateTodo = () => {
       </div>
     </section>
 
-     {error && console.log(error)}
     </>
   )
 }
