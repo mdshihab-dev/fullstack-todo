@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { registration } from "../features/auth/authSlice"
+import { clearMessages, registration } from "../features/auth/authSlice"
 import {Link} from 'react-router-dom'
 import { FaCircleUser, FaEye} from 'react-icons/fa6';
 import { MdAlternateEmail, MdOutlineLock} from 'react-icons/md';
@@ -38,15 +38,16 @@ const Registration = () => {
           position: "top-right",
           autoClose: 3000 , 
           limit: 1,
-          // toastId: "unique-id-123"
          });
         navigate('/login')
+        dispatch(clearMessages())
       }
       if (error) {
         toast.error(error, { 
           position: "top-right", 
           autoClose: 3000 ,
           limit: 1});
+          dispatch(clearMessages())
       }
     }, [message, error,navigate])
 

@@ -58,7 +58,11 @@ export const authSlice = createSlice({
         state.user = null
         state.accessToken = null
         localStorage.removeItem('accessToken')
-    }
+    },
+    clearMessages: (state) => {
+      state.message = null;
+      state.error = null;
+    },
   },
   extraReducers: (builder)=>{
     builder
@@ -111,6 +115,6 @@ export const authSlice = createSlice({
   }
 })
 
-export const { logout } = authSlice.actions
+export const { logout, clearMessages } = authSlice.actions
 
 export default authSlice.reducer
