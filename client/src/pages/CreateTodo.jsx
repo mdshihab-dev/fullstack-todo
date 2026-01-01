@@ -68,7 +68,8 @@ const CreateTodo = () => {
               name='avatar'
               className={inputStyle}
               onChange={(event) => {
-                formik.setFieldValue("avatar", event.currentTarget.files[0]);
+                let file = event.currentTarget.files[0];
+                formik.setFieldValue("avatar",file);
               }}
             />
           </div>
