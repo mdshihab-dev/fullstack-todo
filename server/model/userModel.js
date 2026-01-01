@@ -10,6 +10,6 @@ let usermodel = new Schema({
     password: String,
     refreshToken: String,
     isVerified: Boolean
-}) 
+},{timestamps: true}) 
 
 module.exports = mongoose.model('user', usermodel)
