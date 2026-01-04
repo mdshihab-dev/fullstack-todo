@@ -19,10 +19,10 @@ emailQueue.process("verifyEmail", async (job) => {
 });
 
 emailQueue.on("completed", (job, result) => {
-  console.log(`Job ${job.id} সফলভাবে শেষ হয়েছে`);
+  console.log(`Job ${job.id} completed`);
 });
 
-emailQueue.on("error", (err) => {
+emailQueue.on("error", (err) => { 
   console.log("Queue Error:", err);
 });
 module.exports = emailQueue;
