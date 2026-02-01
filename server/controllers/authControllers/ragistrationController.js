@@ -25,17 +25,17 @@ const ragistrationController = async (req, res) => {
           password: hash,
           isVerified: false
       })
-
+      
   try {  
-    await user.save()
-    let verificationToken = jwt.sign({id: user._id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})
-        
-        await emailQueue.add('verifyEmail', {email : user.email, token: verificationToken}, {
+      await user.save()
+      let verificationToken = jwt.sign({id: user._id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})
+       
+      await emailQueue.add('verifyEmail', {email : user.email, token: verificationToken}, {
             attempts: 5,
             backoff: 5000,
             removeOnComplete: true 
         })
-        res.status(201).send({message : '📩 Verify your email to get started.'})
+      res.status(201).send({message : '📩 Verify your email to get started.'})
     
   } catch (error) {
     console.log('when trying to save data in database' + error);

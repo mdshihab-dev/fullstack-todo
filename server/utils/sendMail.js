@@ -1,6 +1,4 @@
 const nodemailer = require('nodemailer')
-
-
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -11,7 +9,6 @@ let transporter = nodemailer.createTransport({
         refreshToken: process.env.REFRESH_TOKEN
     }
 })
-
 
 const sendMail = async (email, verificationToken) => {
 
@@ -44,7 +41,7 @@ const sendMail = async (email, verificationToken) => {
             </tr>
             <tr>
               <td style="font-size:12px;color:#999999;padding-top:20px;">
-                If you didn’t create this account, please ignore this email.
+                If you didn't create this account, please ignore this email.
               </td>
             </tr>
           </table>

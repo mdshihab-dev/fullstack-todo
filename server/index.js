@@ -1,5 +1,5 @@
-const cors = require('cors') 
 require('dotenv').config()
+const cors = require('cors') 
 const express = require('express')
 const app = express()
 const connectDB = require('./config/database')
@@ -18,7 +18,6 @@ const limiter = rateLimit({
 	legacyHeaders: false, 
     message : {error: "Too many requests, please try again later."}
 })
-
 
 connectDB()
 app.use(cors({
@@ -56,5 +55,5 @@ app.use('/api/todo', todoRoutes)
 app.use('/api/check/', healthRoute)
 
 app.listen(process.env.PORT, () => {
-    console.log('Server is running')
+    console.log(`Server is running${process.env.PORT}`)
 })
